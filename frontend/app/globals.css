@@ -7,9 +7,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  /* `next/font` injects these variables on <html> in app/layout.tsx.
+   * Named distinctly from the theme keys so neither declaration is
+   * self-referential — `--font-sans: var(--font-sans)` resolves to nothing. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,6 +42,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -55,8 +60,11 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.508 0.226 281.5);
   --primary-foreground: oklch(0.985 0 0);
+  --brand: oklch(0.508 0.226 281.5);
+  --brand-soft: oklch(0.63 0.18 288);
+  --grid-line: oklch(0 0 0 / 6%);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -84,14 +92,17 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.145 0.008 285);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: oklch(0.195 0.008 285);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: oklch(0.195 0.008 285);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.545 0.229 281.5);
+  --primary-foreground: oklch(0.985 0 0);
+  --brand: oklch(0.68 0.183 285);
+  --brand-soft: oklch(0.79 0.13 290);
+  --grid-line: oklch(1 0 0 / 5%);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -101,7 +112,7 @@
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: oklch(0.62 0.16 285);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -127,4 +138,59 @@
   html {
     @apply font-sans;
   }
+}
+
+@layer base {
+  /* Respect the user's motion preference for every decorative transition. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Decorative background utilities.
+ * Declared here (instead of arbitrary values scattered across JSX) so every
+ * section shares the exact same grid, glow, and fade treatment.
+ * ------------------------------------------------------------------------ */
+
+@utility bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-radial-glow {
+  background-image: radial-gradient(
+    ellipse 70% 55% at 50% 0%,
+    color-mix(in oklch, var(--brand) 22%, transparent),
+    transparent 72%
+  );
+}
+
+@utility bg-panel-glow {
+  background-image: radial-gradient(
+    ellipse 80% 100% at 50% 100%,
+    color-mix(in oklch, var(--brand) 18%, transparent),
+    transparent 70%
+  );
+}
+
+@utility mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+}
+
+@utility mask-fade-edges {
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 40%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 65% 60% at 50% 40%, #000 40%, transparent 100%);
 }
