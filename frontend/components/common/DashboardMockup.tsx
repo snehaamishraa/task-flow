@@ -28,9 +28,9 @@ const RAIL_ITEMS = [
 ] as const;
 
 const STATS = [
-  { id: "active", label: "Active", value: "42", delta: "+8" },
-  { id: "done", label: "Completed", value: "128", delta: "+21" },
-  { id: "ontrack", label: "On track", value: "94%", delta: "+3%" },
+  { id: "total", label: "Total", value: "12" },
+  { id: "progress", label: "In Progress", value: "3" },
+  { id: "done", label: "Completed", value: "5" },
 ] as const;
 
 const TAG_TONES = {
@@ -141,14 +141,14 @@ export function DashboardMockup({ className }: { className?: string }) {
               {/* Header */}
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Sprint 24</p>
+                  <p className="text-sm font-semibold text-foreground">Your tasks</p>
                   <p className="text-[11px] text-muted-foreground">
-                    Jul 15 – Jul 29 · 6 collaborators
+                    12 tasks · 5 completed
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-medium text-emerald-300">
                   <span className="size-1.5 rounded-full bg-emerald-400" />
-                  On track
+                  Up to date
                 </span>
               </div>
 
@@ -162,11 +162,10 @@ export function DashboardMockup({ className }: { className?: string }) {
                     <p className="text-[10px] tracking-wide text-muted-foreground uppercase">
                       {stat.label}
                     </p>
+                    {/* No delta line: the app stores no history, so there is
+                     * no "+8 this week" figure it could ever show. */}
                     <p className="mt-1 font-mono text-lg leading-none font-semibold tabular-nums text-foreground">
                       {stat.value}
-                    </p>
-                    <p className="mt-1 text-[10px] font-medium text-emerald-400">
-                      {stat.delta}
                     </p>
                   </div>
                 ))}
@@ -218,7 +217,7 @@ export function DashboardMockup({ className }: { className?: string }) {
               <div className="rounded-lg border border-border/60 bg-card/40 p-3">
                 <div className="flex items-center justify-between">
                   <p className="text-[11px] font-medium text-foreground">
-                    Weekly throughput
+                    Tasks by status
                   </p>
                   <span className="font-mono text-[10px] tabular-nums text-muted-foreground">
                     61 tasks
@@ -250,7 +249,7 @@ export function DashboardMockup({ className }: { className?: string }) {
         </span>
         <span className="leading-tight">
           <span className="block text-[11px] font-semibold text-foreground">
-            Cycle time −32%
+            Search + filters
           </span>
           <span className="block text-[10px] text-muted-foreground">vs. last sprint</span>
         </span>
@@ -259,7 +258,7 @@ export function DashboardMockup({ className }: { className?: string }) {
       <div className="absolute -top-4 -right-3 hidden items-center gap-2 rounded-full border border-brand/25 bg-card px-3 py-1.5 shadow-lg shadow-brand/10 transition-transform duration-500 ease-out group-hover:translate-y-1 lg:flex">
         <Zap className="size-3.5 text-brand" />
         <span className="text-[11px] font-medium text-foreground">
-          4 automations ran
+          Verified sign-in
         </span>
       </div>
     </div>

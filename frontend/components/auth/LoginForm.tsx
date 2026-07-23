@@ -52,15 +52,6 @@ export default function LoginForm() {
         return;
       }
 
-      // Correct password but the address was never proven: the backend has
-      // just emailed a fresh code instead of issuing a token.
-      if (data.requires_verification) {
-        router.push(
-          `/verify-otp?email=${encodeURIComponent(data.email ?? email)}`
-        );
-        return;
-      }
-
       localStorage.setItem("token", data.token);
 
       router.push("/dashboard");

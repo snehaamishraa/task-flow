@@ -1,4 +1,4 @@
-import { Gauge, ShieldCheck, TrendingUp, Users } from "lucide-react";
+import { KeyRound, ListChecks, Search } from "lucide-react";
 
 import { CTA } from "@/components/common/CTA";
 import { Container } from "@/components/common/Container";
@@ -11,37 +11,40 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 
 /**
- * Headline metrics. Rendered as a description list so each figure is announced
- * with the label it belongs to rather than as a loose number.
+ * Facts about the product, not usage statistics.
+ *
+ * The previous version claimed 12,000 teams, 4.2M tasks completed, and a
+ * 99.98% uptime figure. None of those were measured — the app has no analytics
+ * and no such history. These four are things anyone can verify by signing up.
  */
 const METRICS = [
-  { id: "teams", value: "12,000+", label: "Teams onboarded" },
-  { id: "tasks", value: "4.2M", label: "Tasks completed" },
-  { id: "uptime", value: "99.98%", label: "Rolling 90-day uptime" },
-  { id: "cycle", value: "32%", label: "Faster average cycle time" },
+  { id: "price", value: "$0", label: "Cost to use, with no card" },
+  { id: "priorities", value: "3", label: "Priority levels" },
+  { id: "statuses", value: "3", label: "Status stages" },
+  { id: "signin", value: "2", label: "Ways to sign in" },
 ] as const;
 
 const BENEFITS = [
   {
-    id: "velocity",
-    icon: TrendingUp,
-    title: "Ship measurably faster",
+    id: "clarity",
+    icon: ListChecks,
+    title: "One list, not five",
     description:
-      "Teams close their first sprint in TaskFlow with a third less time lost to status chasing.",
+      "Titles, descriptions, priorities, due dates, and status live on the same screen, so there is nothing to reconcile.",
   },
   {
-    id: "clarity",
-    icon: Users,
-    title: "One source of truth",
+    id: "findable",
+    icon: Search,
+    title: "Find any task in seconds",
     description:
-      "Boards, comments, and deadlines live together, so nobody reconstructs context from chat threads.",
+      "Search titles and descriptions as you type, then narrow by status and priority when the list gets long.",
   },
   {
     id: "trust",
-    icon: ShieldCheck,
-    title: "Secure by default",
+    icon: KeyRound,
+    title: "Verified accounts only",
     description:
-      "SOC 2 Type II, encryption in transit and at rest, and role-based access on every plan.",
+      "Email signups confirm a 6-digit code before the account works, and Google sign-in is verified by Google.",
   },
 ] as const;
 
@@ -63,8 +66,8 @@ function Benefits() {
         <SectionHeading
           eyebrow="Why TaskFlow"
           titleId="benefits-title"
-          title="Built for teams that measure their throughput"
-          description="The numbers behind the workspace — and what they mean for the way your team ships."
+          title="A task list that stays out of your way"
+          description="No workspaces to configure and no integrations to connect. Sign in, add tasks, get on with them."
         />
 
         <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/60 lg:mt-16 lg:grid-cols-4">
@@ -104,11 +107,6 @@ function Benefits() {
             );
           })}
         </ul>
-
-        <p className="mt-10 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-          <Gauge className="size-3.5 text-brand" aria-hidden="true" />
-          Metrics reflect aggregated, anonymized workspace activity.
-        </p>
       </Container>
     </section>
   );

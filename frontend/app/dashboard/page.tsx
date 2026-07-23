@@ -77,10 +77,12 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
-                size="icon-sm"
+                size="icon"
                 onClick={refresh}
                 disabled={isFetching}
                 aria-label="Refresh tasks"
+                // 36px rather than 32px: this sits alone in the header with no
+                // adjacent label to widen the tap area.
               >
                 <RefreshCw
                   aria-hidden="true"

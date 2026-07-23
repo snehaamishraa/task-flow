@@ -22,23 +22,10 @@ type User struct {
 	// colliding on the unique index.
 	GoogleID *string `gorm:"uniqueIndex" json:"-"`
 
-	// Google has already proven the address, so those accounts start verified.
-	// Password signups stay false until they enter the emailed code.
+	// Set for accounts created through Google, which has already proven the
+	// address. Nothing gates on it today; it is kept so email verification can
+	// be reintroduced without another migration.
 	IsVerified bool `gorm:"not null;default:false" json:"is_verified"`
-
-	// The code is stored as a bcrypt hash, never in plain text: a leaked
-	// database snapshot should not hand out working codes.
-	OTPHash string `json:"-"`
-
-	OTPExpiresAt *time.Time `json:"-"`
-
-	// Wrong guesses against the current code, reset whenever a new one is sent.
-	// Six digits is a million possibilities, brute-forceable in seconds without
-	// a cap.
-	OTPAttempts int `gorm:"not null;default:0" json:"-"`
-
-	// Drives the resend cooldown.
-	OTPSentAt *time.Time `json:"-"`
 
 	Tasks []Task `json:"tasks,omitempty"`
 

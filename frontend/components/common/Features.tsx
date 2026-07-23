@@ -14,8 +14,8 @@ export function Features() {
         <SectionHeading
           eyebrow="Features"
           titleId="features-title"
-          title="Everything your team needs, nothing it doesn't"
-          description="Six focused capabilities that replace the spreadsheet, the sticky notes, and the weekly status call."
+          title="Everything you need to run a task list"
+          description="Six things TaskFlow does. No integrations to wire up, no workspace to configure first."
         />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6">

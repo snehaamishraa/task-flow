@@ -61,10 +61,12 @@ export function SearchBar({
         <Button
           type="button"
           variant="ghost"
-          size="icon-xs"
+          size="icon-sm"
           onClick={() => onChange("")}
           aria-label="Clear search"
-          className="absolute top-1/2 right-1.5 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+          // icon-xs is 24px, which is an awkward target on a touchscreen.
+          // icon-sm (32px) still sits inside the 40px field.
+          className="absolute top-1/2 right-1 -translate-y-1/2 text-muted-foreground hover:text-foreground"
         >
           <X aria-hidden="true" />
         </Button>

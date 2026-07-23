@@ -17,8 +17,8 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              The task manager for teams that would rather ship than sit in
-              another status meeting.
+              A simple, free task manager. Add what you need to do, set a
+              priority and a due date, and keep track of what is left.
             </p>
 
             <ul className="mt-6 flex items-center gap-2">
@@ -62,12 +62,11 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 sm:flex-row">
+          {/* Was "TaskFlow, Inc." — there is no company. And the green dot read
+           * "All systems operational", which implies status monitoring that
+           * does not exist. */}
           <p className="text-xs text-muted-foreground">
-            © {year} TaskFlow, Inc. All rights reserved.
-          </p>
-          <p className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="size-1.5 rounded-full bg-emerald-400" />
-            All systems operational
+            © {year} TaskFlow. A personal project by Sneha Mishra.
           </p>
         </div>
       </Container>

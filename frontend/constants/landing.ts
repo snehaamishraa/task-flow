@@ -1,23 +1,16 @@
 import {
-  ArrowRight,
-  Blocks,
-  CalendarClock,
-  ChartColumnIncreasing,
-  Check,
-  Hourglass,
-  Kanban,
+  CircleCheckBig,
+  Lightbulb,
+  KeyRound,
   ListChecks,
-  Rocket,
-  UserPlus,
-  Users,
-  Workflow,
+  LogIn,
+  Search,
+  SignalHigh,
+  SlidersHorizontal,
+  SquarePen,
 } from "lucide-react";
 
-import {
-  GitHubIcon,
-  LinkedInIcon,
-  XIcon,
-} from "@/components/common/SocialIcons";
+import { GitHubIcon } from "@/components/common/SocialIcons";
 import type {
   Feature,
   FooterColumn,
@@ -26,6 +19,15 @@ import type {
   SocialLink,
   Step,
 } from "@/types/landing";
+
+/**
+ * Everything in this file describes what the app actually does today.
+ *
+ * Nothing here is aspirational: if a capability is not built, it is not
+ * listed, and every link points at a route that exists. Copy that promises
+ * teams, integrations, or automations would be found out the moment somebody
+ * signs up.
+ */
 
 /** Primary navigation shown in the navbar and mirrored in the mobile menu. */
 export const NAV_LINKS: NavLink[] = [
@@ -36,64 +38,64 @@ export const NAV_LINKS: NavLink[] = [
 
 export const FEATURES: Feature[] = [
   {
-    title: "Visual task boards",
+    title: "Create and edit tasks",
     description:
-      "Drag work across customizable boards with swimlanes, filters, and saved views the whole team shares.",
-    icon: Kanban,
+      "Give each task a title, description, priority, and due date. Change any of it later — nothing is locked in once saved.",
+    icon: SquarePen,
   },
   {
-    title: "Automations that run themselves",
+    title: "Track status",
     description:
-      "Route assignments, flip statuses, and fire reminders with rules you build once in a visual editor.",
-    icon: Workflow,
+      "Move work through Pending, In Progress, and Completed. Overdue dates are flagged so nothing quietly slips past you.",
+    icon: CircleCheckBig,
   },
   {
-    title: "Real-time collaboration",
+    title: "Set priorities",
     description:
-      "Threaded comments, mentions, and live presence keep everyone aligned without another status meeting.",
-    icon: Users,
+      "Mark work Low, Medium, or High. Each level has its own colour and icon, so the urgent items stand out at a glance.",
+    icon: SignalHigh,
   },
   {
-    title: "Deadline intelligence",
+    title: "Search as you type",
     description:
-      "Dependencies, capacity limits, and smart due dates surface risk long before a sprint slips.",
-    icon: CalendarClock,
+      "Search runs across titles and descriptions and updates while you type. Capitalisation doesn't matter.",
+    icon: Search,
   },
   {
-    title: "Progress analytics",
+    title: "Filter the list",
     description:
-      "Burndown, cycle time, and velocity reports that turn raw activity into decisions you can defend.",
-    icon: ChartColumnIncreasing,
+      "Narrow by status, priority, or both. Combine filters with a search term to get to a specific task quickly.",
+    icon: SlidersHorizontal,
   },
   {
-    title: "150+ integrations",
+    title: "See where things stand",
     description:
-      "Two-way sync with Slack, GitHub, Figma, and the rest of your stack, plus a typed REST and webhook API.",
-    icon: Blocks,
+      "Your dashboard counts total, pending, in-progress, and completed tasks, and updates the moment anything changes.",
+    icon: ListChecks,
   },
 ];
 
 export const STEPS: Step[] = [
   {
-    title: "Create your workspace",
+    title: "Create your account",
     description:
-      "Sign up in seconds, invite teammates, and import what you already have from Jira, Asana, or a CSV.",
-    icon: UserPlus,
-    highlights: ["Templates for product, design, and ops", "Role-based access from day one"],
+      "Sign up with an email and password, or continue with Google. Either way takes under a minute.",
+    icon: LogIn,
+    highlights: ["Email and password", "Or one-click Google sign-in"],
   },
   {
-    title: "Plan and assign",
+    title: "Verify it's really you",
     description:
-      "Break work into tasks, set owners and due dates, then hand the repetitive parts to automations.",
+      "Email signups get a 6-digit code. Enter it and you're in — no unverified addresses get an account.",
+    icon: KeyRound,
+    highlights: ["Code expires in 10 minutes", "Google accounts skip this step"],
+  },
+  {
+    title: "Start adding tasks",
+    description:
+      "Add your first task, set its priority and due date, then use search and filters as the list grows.",
     icon: ListChecks,
-    highlights: ["Drag-and-drop sprint planning", "Rules for routing and reminders"],
-  },
-  {
-    title: "Ship and track",
-    description:
-      "Watch progress update live and share dashboards that keep stakeholders out of your inbox.",
-    icon: Rocket,
-    highlights: ["Live dashboards and reports", "Automatic weekly digests"],
+    highlights: ["Edit or delete anything, anytime", "Your tasks are yours alone"],
   },
 ];
 
@@ -101,24 +103,24 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     id: "free",
     name: "Free",
-    tagline: "Everything a small team needs to get organized and stay there.",
+    tagline: "Everything TaskFlow does today, at no cost.",
     price: "$0",
     priceSuffix: "/ month",
-    priceNote: "Free forever. No card, no trial clock.",
-    badge: { label: "Available now", icon: Check, variant: "outline" },
+    priceNote: "Free, with no card and no trial period.",
+    badge: { label: "Available now", icon: CircleCheckBig, variant: "outline" },
     features: [
-      "Up to 5 teammates",
-      "Unlimited tasks and projects",
-      "3 boards with saved views",
-      "Real-time comments and mentions",
-      "Slack and GitHub integrations",
-      "Community support",
+      "Unlimited tasks",
+      "Priority and status on every task",
+      "Due dates with overdue warnings",
+      "Search across titles and descriptions",
+      "Status and priority filters",
+      "Email or Google sign-in",
     ],
     cta: {
       label: "Get started free",
       href: "/signup",
       note: "No credit card required",
-      icon: ArrowRight,
+      icon: LogIn,
     },
     featured: false,
     comingSoon: false,
@@ -126,30 +128,35 @@ export const PRICING_PLANS: PricingPlan[] = [
   {
     id: "pro",
     name: "Pro",
-    tagline: "Automation, analytics, and controls for teams that are scaling.",
-    price: "$12",
-    priceSuffix: "/ user / month",
-    priceNote: "Indicative pricing — confirmed at launch.",
-    badge: { label: "Coming soon", icon: Hourglass, variant: "default" },
-    featuresLeadIn: "Everything in Free, plus",
+    tagline: "Ideas being explored for a paid tier. Nothing is built yet.",
+    price: "TBD",
+    priceSuffix: "",
+    priceNote: "No price set — this plan does not exist yet.",
+    badge: { label: "Not built yet", icon: Lightbulb, variant: "default" },
+    featuresLeadIn: "Under consideration",
     features: [
-      "Unlimited teammates and boards",
-      "Visual workflow automations",
-      "Advanced analytics and burndown reports",
-      "Deadline intelligence and workload balancing",
-      "All 150+ integrations with two-way sync",
-      "SSO, audit log, and priority support",
+      "Shared workspaces for more than one person",
+      "Recurring tasks",
+      "Reminders before a due date",
+      "Attachments and comments",
+      "Calendar and board views",
     ],
     cta: {
-      label: "Coming soon",
-      note: "In active development — not yet available.",
-      icon: Hourglass,
+      label: "Not available",
+      note: "Ideas only — no timeline, and none of it is built.",
+      icon: Lightbulb,
     },
     featured: true,
     comingSoon: true,
   },
 ];
 
+/**
+ * Only routes that exist.
+ *
+ * The earlier version linked to /about, /careers, /blog, /docs and a set of
+ * legal pages, none of which were ever built — every one of them 404'd.
+ */
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Product",
@@ -157,40 +164,37 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { label: "Features", href: "#features" },
       { label: "How it works", href: "#how-it-works" },
       { label: "Pricing", href: "#pricing" },
-      { label: "Changelog", href: "/changelog" },
     ],
   },
   {
-    title: "Company",
+    title: "Account",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Careers", href: "/careers" },
-      { label: "Blog", href: "/blog" },
-      { label: "Customers", href: "/customers" },
+      { label: "Sign up", href: "/signup" },
+      { label: "Log in", href: "/login" },
     ],
   },
   {
-    title: "Resources",
+    title: "Project",
     links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Help center", href: "/help" },
-      { label: "API reference", href: "/docs/api" },
-      { label: "Community", href: "/community" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy", href: "/legal/privacy" },
-      { label: "Terms", href: "/legal/terms" },
-      { label: "Security", href: "/legal/security" },
-      { label: "Status", href: "/status" },
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/snehaamishraa/task-flow",
+        external: true,
+      },
     ],
   },
 ];
 
+/**
+ * Only the GitHub repository, because it is the only one that exists.
+ *
+ * The X and LinkedIn entries pointed at those sites' homepages rather than any
+ * TaskFlow profile, which reads as a real presence that is not there.
+ */
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: "TaskFlow on GitHub", href: "https://github.com", icon: GitHubIcon },
-  { label: "TaskFlow on X", href: "https://x.com", icon: XIcon },
-  { label: "TaskFlow on LinkedIn", href: "https://linkedin.com", icon: LinkedInIcon },
+  {
+    label: "TaskFlow source on GitHub",
+    href: "https://github.com/snehaamishraa/task-flow",
+    icon: GitHubIcon,
+  },
 ];

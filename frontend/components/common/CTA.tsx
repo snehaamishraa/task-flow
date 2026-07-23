@@ -16,19 +16,19 @@ export function CTA() {
           <div className="mx-auto flex max-w-2xl flex-col items-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-medium text-brand">
               <Sparkles className="size-3.5" aria-hidden="true" />
-              Set up in under 5 minutes
+              Nothing to configure
             </span>
 
             <h2
               id="cta-title"
               className="mt-6 text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              Give your team one place to get things done
+              Start with your first task
             </h2>
 
             <p className="mt-5 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Join 12,000+ teams who traded scattered tools and status meetings
-              for a workspace that keeps itself up to date.
+              Create an account, verify your email, and add something you need
+              to get done. That is the whole setup.
             </p>
 
             <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
@@ -44,18 +44,20 @@ export function CTA() {
                 />
               </LinkButton>
 
+              {/* Was "Talk to sales" pointing at /contact-sales, a route that
+               * does not exist. There is no sales team and no paid plan. */}
               <LinkButton
-                href="/contact-sales"
+                href="/login"
                 variant="outline"
                 size="lg"
                 className="h-11 px-5 text-sm transition-colors duration-300 hover:border-brand/40"
               >
-                Talk to sales
+                I already have an account
               </LinkButton>
             </div>
 
             <p className="mt-6 text-xs text-muted-foreground">
-              Free 14-day trial · No credit card required · SOC 2 Type II
+              Free · No credit card required
             </p>
           </div>
         </div>

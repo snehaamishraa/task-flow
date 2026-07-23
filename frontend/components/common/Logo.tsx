@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -19,12 +19,19 @@ export function Logo({ href = "#home", className }: LogoProps) {
         className,
       )}
     >
-      <span
-        aria-hidden="true"
-        className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-soft shadow-lg shadow-brand/25 transition-transform duration-300 ease-out group-hover:scale-105 group-hover:rotate-3"
-      >
-        <Check className="size-4 text-white" strokeWidth={3} />
-      </span>
+      <Image
+        src="/logo.png"
+        alt=""
+        // Intrinsic size of the cropped file. next/image needs the real
+        // dimensions to reserve space and avoid layout shift; the rendered
+        // size comes from the classes below.
+        width={628}
+        height={468}
+        // The mark sits above the fold in the navbar, so it should not wait
+        // for lazy loading.
+        priority
+        className="h-8 w-auto transition-transform duration-300 ease-out group-hover:scale-105"
+      />
       <span className="text-base font-semibold tracking-tight text-foreground">
         TaskFlow
       </span>

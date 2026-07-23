@@ -50,11 +50,11 @@ export default function SignupForm() {
         return;
       }
 
-      // No token is issued until the emailed code is entered, so signup ends
-      // at the verify screen rather than at login.
-      router.push(
-        `/verify-otp?email=${encodeURIComponent(data.email ?? email)}`
-      );
+      // Signup returns a token directly — there is no verification step, so
+      // the new account is usable immediately.
+      localStorage.setItem("token", data.token);
+
+      router.push("/dashboard");
     } catch {
       setError("Something went wrong.");
     } finally {

@@ -7,12 +7,12 @@ import (
 )
 
 type Task struct {
-	ID          uint           `json:"id" gorm:"primaryKey"`
-	Title       string         `json:"title" gorm:"not null"`
-	Description string         `json:"description"`
-	Status      string         `json:"status" gorm:"default:Pending"`
-	Priority    string         `json:"priority" gorm:"default:Medium"`
-	DueDate     *time.Time     `json:"due_date"`
+	ID          uint       `json:"id" gorm:"primaryKey"`
+	Title       string     `json:"title" gorm:"not null"`
+	Description string     `json:"description"`
+	Status      string     `json:"status" gorm:"default:Pending"`
+	Priority    string     `json:"priority" gorm:"default:Medium"`
+	DueDate     *time.Time `json:"due_date"`
 
 	UserID uint `json:"user_id" gorm:"not null"`
 

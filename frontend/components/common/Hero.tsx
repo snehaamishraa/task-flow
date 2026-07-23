@@ -1,13 +1,15 @@
-import { ArrowRight, Check, CirclePlay, Sparkles } from "lucide-react";
+import { ArrowRight, Check, CirclePlay } from "lucide-react";
 
 import { Container } from "@/components/common/Container";
 import { DashboardMockup } from "@/components/common/DashboardMockup";
 import { LinkButton } from "@/components/common/LinkButton";
 
+// Each of these is literally true. There is no trial clock to expire and
+// nothing to cancel, because there is no paid plan to be on.
 const TRUST_POINTS = [
-  "Free 14-day trial",
+  "Free to use",
   "No credit card required",
-  "Cancel anytime",
+  "Verified email or Google sign-in",
 ];
 
 export function Hero() {
@@ -26,14 +28,9 @@ export function Hero() {
       <Container className="py-16 sm:py-24 lg:py-28">
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div className="mx-auto flex max-w-2xl flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-medium text-brand transition-colors duration-300 hover:border-brand/45 hover:bg-brand/15">
-              <Sparkles className="size-3.5" aria-hidden="true" />
-              Automations are live in every plan
-            </span>
-
             <h1
               id="hero-title"
-              className="mt-6 text-balance text-4xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+              className="text-balance text-4xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
             >
               Manage Your Tasks{" "}
               <span className="bg-gradient-to-r from-brand-soft via-brand to-brand-soft bg-clip-text text-transparent">
@@ -42,9 +39,9 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              TaskFlow brings your boards, deadlines, and status updates into one
-              fast workspace. Plan the sprint, automate the busywork, and give
-              everyone a single place to see what happens next.
+              TaskFlow keeps your tasks, priorities, and deadlines on one
+              screen. Add what you need to do, mark it Pending, In Progress, or
+              Completed, and find any of it again in seconds.
             </p>
 
             <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">

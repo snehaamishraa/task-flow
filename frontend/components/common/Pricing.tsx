@@ -14,8 +14,8 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Pricing"
           titleId="pricing-title"
-          title="Start free. Upgrade when the team outgrows it."
-          description="The Free plan is live today and stays free. Pro adds automation, analytics, and admin controls — it's in active development."
+          title="Free, with no paid plan to upsell you"
+          description="Everything TaskFlow does today is free. Pro is a list of ideas being considered — none of it exists yet."
         />
 
         <ul className="mx-auto mt-14 grid max-w-5xl gap-6 lg:mt-16 lg:grid-cols-2 lg:gap-8">
@@ -23,11 +23,6 @@ export function Pricing() {
             <PricingCard key={plan.id} plan={plan} />
           ))}
         </ul>
-
-        <p className="mt-10 text-center text-xs text-muted-foreground">
-          Prices in USD. Pro pricing is indicative and will be confirmed before
-          launch.
-        </p>
       </Container>
     </section>
   );

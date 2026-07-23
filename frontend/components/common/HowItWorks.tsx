@@ -19,8 +19,8 @@ export function HowItWorks() {
         <SectionHeading
           eyebrow="How it works"
           titleId="how-it-works-title"
-          title="From chaos to clarity in three steps"
-          description="Most teams move their first project into TaskFlow on the same afternoon they sign up."
+          title="Up and running in three steps"
+          description="Sign up, confirm your email, and start adding tasks. There is nothing else to set up."
         />
 
         <div className="relative mt-14 lg:mt-16">
