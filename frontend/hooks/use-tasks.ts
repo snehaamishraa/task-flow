@@ -196,8 +196,9 @@ export function useTasks(): UseTasksResult {
     async (task: Task): Promise<MutationResult<null>> => {
       try {
         // Not optimistic on purpose. Removing the row first would need a
-        // rollback on failure, and this is the endpoint most likely to fail
-        // today, so the row stays until the server confirms.
+        // rollback on failure, and a destructive action is the wrong place to
+        // show an outcome that might not have happened, so the row stays until
+        // the server confirms.
         await deleteTaskRequest(task.id);
         refresh();
         return { ok: true, data: null };
