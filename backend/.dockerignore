@@ -1,0 +1,11 @@
+# Never let secrets into an image layer — they persist even if deleted later.
+.env
+.env.*
+
+# Build artifacts and local noise
+bin/
+taskflow
+*.test
+.DS_Store
+Dockerfile
+.dockerignore

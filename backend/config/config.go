@@ -8,13 +8,15 @@ import (
 )
 
 func LoadEnv() {
-	err := godotenv.Load()
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	// A missing .env is normal in production: hosting platforms inject
+	// variables into the environment directly, and there is no file to read.
+	// Exiting here would make every deploy crash on boot.
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using environment variables")
+		return
 	}
 
-	log.Println("Environment variables loaded successfully")
+	log.Println("Environment variables loaded from .env")
 }
 
 func GetEnv(key string) string {

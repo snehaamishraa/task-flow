@@ -46,7 +46,13 @@ func main() {
 
 	routes.SetupRoutes(app)
 
-	log.Println("🚀 Server running on http://localhost:8080")
+	// Hosting platforms assign a port and pass it in PORT. Binding to a
+	// hardcoded 8080 would leave the container healthy but unreachable.
+	port := config.GetEnvOr("8080", "PORT")
 
-	log.Fatal(app.Listen(":8080"))
+	log.Printf("🚀 Server listening on :%s", port)
+
+	// 0.0.0.0, not localhost: inside a container, binding to the loopback
+	// interface makes the service unreachable from outside it.
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 }
