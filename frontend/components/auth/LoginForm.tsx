@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+// Reads NEXT_PUBLIC_API_URL, falling back to localhost. Hardcoding the URL
+// here would make every deployed build point at the visitor's own machine.
+import { API_BASE_URL } from "@/lib/api-client";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -27,7 +30,7 @@ export default function LoginForm() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/auth/login",
+        `${API_BASE_URL}/api/auth/login`,
         {
           method: "POST",
 
@@ -49,10 +52,19 @@ export default function LoginForm() {
         return;
       }
 
+      // Correct password but the address was never proven: the backend has
+      // just emailed a fresh code instead of issuing a token.
+      if (data.requires_verification) {
+        router.push(
+          `/verify-otp?email=${encodeURIComponent(data.email ?? email)}`
+        );
+        return;
+      }
+
       localStorage.setItem("token", data.token);
 
       router.push("/dashboard");
-    } catch (err) {
+    } catch {
       setError("Something went wrong.");
     } finally {
       setLoading(false);

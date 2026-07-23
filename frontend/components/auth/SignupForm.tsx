@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+// Reads NEXT_PUBLIC_API_URL, falling back to localhost. Hardcoding the URL
+// here would make every deployed build point at the visitor's own machine.
+import { API_BASE_URL } from "@/lib/api-client";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -26,7 +29,7 @@ export default function SignupForm() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/auth/signup",
+        `${API_BASE_URL}/api/auth/signup`,
         {
           method: "POST",
           headers: {
@@ -47,8 +50,12 @@ export default function SignupForm() {
         return;
       }
 
-      router.push("/login");
-    } catch (err) {
+      // No token is issued until the emailed code is entered, so signup ends
+      // at the verify screen rather than at login.
+      router.push(
+        `/verify-otp?email=${encodeURIComponent(data.email ?? email)}`
+      );
+    } catch {
       setError("Something went wrong.");
     } finally {
       setLoading(false);

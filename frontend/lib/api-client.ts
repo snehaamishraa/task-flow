@@ -213,8 +213,7 @@ export async function apiFetch<T>(
       );
     }
     // Covers server-down, DNS failure, CORS rejection, and a connection that
-    // dies mid-request (which is what an unrecovered panic in a Fiber handler
-    // looks like from the browser).
+    // dies mid-request.
     throw new ApiError(
       `Could not reach the server at ${API_BASE_URL}. Check that the API is running.`,
       0,
