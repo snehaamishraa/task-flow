@@ -6,8 +6,6 @@
 
 Organize • Prioritize • Track • Achieve
 
-<img src="./public/dashboard-preview.png" width="900"/>
-
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
 ![Fiber](https://img.shields.io/badge/Fiber-2DBE60?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js)
