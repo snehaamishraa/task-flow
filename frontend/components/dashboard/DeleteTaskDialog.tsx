@@ -71,7 +71,7 @@ export function DeleteTaskDialog({
 
         <AlertDialogHeader>
           <AlertDialogTitle>Delete this task?</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogDescription className="break-words">
             {task
               ? `"${task.title}" will be removed. This cannot be undone.`
               : null}

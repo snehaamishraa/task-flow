@@ -117,14 +117,14 @@ export function TaskCard({
           {/* h3: the page provides h1, and each dashboard section an h2. */}
           <h3
             id={titleId}
-            className="line-clamp-2 text-sm leading-snug font-semibold text-balance"
+            className="line-clamp-2 text-sm leading-snug font-semibold break-words text-balance"
           >
             {task.title}
           </h3>
         </CardTitle>
 
         {task.description ? (
-          <CardDescription className="line-clamp-2 text-sm leading-relaxed">
+          <CardDescription className="line-clamp-2 text-sm leading-relaxed break-words">
             {task.description}
           </CardDescription>
         ) : null}
