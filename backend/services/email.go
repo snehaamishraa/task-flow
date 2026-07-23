@@ -2,11 +2,13 @@ package services
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"mime"
+	"net"
 	"net/http"
 	"net/smtp"
 	"strings"
@@ -16,6 +18,11 @@ import (
 )
 
 const resendEndpoint = "https://api.resend.com/emails"
+
+// Ceiling for the entire SMTP conversation. Long enough for a slow relay,
+// short enough that a blocked port fails visibly instead of hanging the
+// signup request behind it.
+const smtpTimeout = 15 * time.Second
 
 var emailClient = &http.Client{Timeout: 15 * time.Second}
 
@@ -77,12 +84,60 @@ func sendViaSMTP(to string, subject string, html string, text string) error {
 	from := config.GetEnvOr(fmt.Sprintf("TaskFlow <%s>", user), "MAIL_FROM")
 
 	msg := buildMIMEMessage(from, to, subject, html, text)
+	addr := net.JoinHostPort(host, port)
 
-	// net/smtp upgrades to STARTTLS automatically when the server advertises
-	// it, which Gmail does on 587.
-	auth := smtp.PlainAuth("", user, password, host)
+	// Dialled by hand rather than via smtp.SendMail, which takes no timeout:
+	// if the host is unreachable or the port is filtered — which some
+	// platforms do to outbound 587 — the call blocks forever and the HTTP
+	// request hangs with it. A deadline turns that into a fast, clear failure.
+	conn, err := net.DialTimeout("tcp", addr, smtpTimeout)
+	if err != nil {
+		return fmt.Errorf("could not connect to %s: %w", addr, err)
+	}
+	defer conn.Close()
 
-	return smtp.SendMail(host+":"+port, auth, extractAddress(from), []string{to}, msg)
+	// Covers the whole conversation, not just the dial, so a server that
+	// accepts the connection and then stalls cannot hang the request either.
+	if err := conn.SetDeadline(time.Now().Add(smtpTimeout)); err != nil {
+		return err
+	}
+
+	client, err := smtp.NewClient(conn, host)
+	if err != nil {
+		return fmt.Errorf("smtp handshake failed: %w", err)
+	}
+	defer client.Close()
+
+	// Port 587 is submission: plaintext first, then upgraded via STARTTLS.
+	if ok, _ := client.Extension("STARTTLS"); ok {
+		if err := client.StartTLS(&tls.Config{ServerName: host}); err != nil {
+			return fmt.Errorf("could not start TLS: %w", err)
+		}
+	}
+
+	if err := client.Auth(smtp.PlainAuth("", user, password, host)); err != nil {
+		return fmt.Errorf("smtp authentication failed: %w", err)
+	}
+
+	if err := client.Mail(extractAddress(from)); err != nil {
+		return err
+	}
+	if err := client.Rcpt(to); err != nil {
+		return err
+	}
+
+	w, err := client.Data()
+	if err != nil {
+		return err
+	}
+	if _, err := w.Write(msg); err != nil {
+		return err
+	}
+	if err := w.Close(); err != nil {
+		return err
+	}
+
+	return client.Quit()
 }
 
 // buildMIMEMessage assembles a multipart/alternative message.
