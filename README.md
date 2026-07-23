@@ -252,23 +252,6 @@ npm run dev
 
 ---
 
-# 📸 Screenshots
-
-| Landing Page |
-|--------------|
-| *(Add Screenshot)* |
-
-| Dashboard |
-|-----------|
-| *(Add Screenshot)* |
-
-| Login |
-|-------|
-| *(Add Screenshot)* |
-
----
----
-
 <div align="center">
 
 ### ⭐ If you like this project, don't forget to give it a star!
