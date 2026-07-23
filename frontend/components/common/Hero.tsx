@@ -27,7 +27,7 @@ export function Hero() {
 
       <Container className="py-16 sm:py-24 lg:py-28">
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-12 xl:gap-16">
-          <div className="mx-auto flex max-w-2xl flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
+          <div className="mx-auto flex min-w-0 max-w-2xl flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
             <h1
               id="hero-title"
               className="text-balance text-4xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
@@ -84,7 +84,7 @@ export function Hero() {
             </ul>
           </div>
 
-          <DashboardMockup className="mx-auto w-full max-w-xl lg:max-w-none" />
+          <DashboardMockup className="mx-auto w-full min-w-0 max-w-xl lg:max-w-none" />
         </div>
       </Container>
     </section>

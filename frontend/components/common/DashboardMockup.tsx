@@ -140,9 +140,9 @@ export function DashboardMockup({ className }: { className?: string }) {
             <div className="space-y-4 p-4 sm:p-5">
               {/* Header */}
               <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Your tasks</p>
-                  <p className="text-[11px] text-muted-foreground">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-foreground">Your tasks</p>
+                  <p className="truncate text-[11px] text-muted-foreground">
                     12 tasks · 5 completed
                   </p>
                 </div>
@@ -157,9 +157,9 @@ export function DashboardMockup({ className }: { className?: string }) {
                 {STATS.map((stat) => (
                   <div
                     key={stat.id}
-                    className="rounded-lg border border-border/60 bg-card/50 p-2.5 transition-colors duration-300 group-hover:border-border"
+                    className="min-w-0 rounded-lg border border-border/60 bg-card/50 p-2.5 transition-colors duration-300 group-hover:border-border"
                   >
-                    <p className="text-[10px] tracking-wide text-muted-foreground uppercase">
+                    <p className="truncate text-[10px] tracking-wide text-muted-foreground uppercase">
                       {stat.label}
                     </p>
                     {/* No delta line: the app stores no history, so there is
@@ -216,7 +216,7 @@ export function DashboardMockup({ className }: { className?: string }) {
               {/* Activity chart */}
               <div className="rounded-lg border border-border/60 bg-card/40 p-3">
                 <div className="flex items-center justify-between">
-                  <p className="text-[11px] font-medium text-foreground">
+                  <p className="truncate text-[11px] font-medium text-foreground">
                     Tasks by status
                   </p>
                   <span className="font-mono text-[10px] tabular-nums text-muted-foreground">
