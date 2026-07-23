@@ -15,10 +15,30 @@
 /** localStorage key written by the existing LoginForm. Must stay in sync. */
 export const TOKEN_STORAGE_KEY = "token";
 
+/**
+ * Ensure a base URL carries a scheme.
+ *
+ * A value like "api.example.com" is not an absolute URL: the browser treats
+ * `${base}/api/tasks` as a *relative path* and requests
+ * https://your-frontend/api.example.com/api/tasks, which 404s against the
+ * frontend's own origin with nothing to suggest the env var is at fault.
+ * Dashboards invite this — you paste a hostname because that is what they show
+ * you — so it is normalized here rather than left to trip someone up.
+ */
+function withScheme(raw: string): string {
+  const value = raw.trim().replace(/\/+$/, "");
+  if (value === "" || /^https?:\/\//i.test(value)) return value;
+
+  // Local development has no TLS; anything else is assumed to be served over
+  // HTTPS, which every hosting platform does by default.
+  const isLocal = /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/i.test(value);
+  return `${isLocal ? "http" : "https"}://${value}`;
+}
+
 /** Backend origin. Override per-environment with NEXT_PUBLIC_API_URL. */
-export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"
-).replace(/\/$/, "");
+export const API_BASE_URL = withScheme(
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080",
+);
 
 /** Abort a request that hasn't responded in this many ms. */
 const DEFAULT_TIMEOUT_MS = 15_000;
