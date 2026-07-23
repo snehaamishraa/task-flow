@@ -267,33 +267,6 @@ npm run dev
 | *(Add Screenshot)* |
 
 ---
-
-# 🚀 Roadmap
-
-- [x] Authentication
-- [x] Task CRUD
-- [x] Dashboard
-- [x] Search
-- [x] Filters
-- [x] Statistics
-- [ ] Dark Mode
-- [ ] Drag & Drop
-- [ ] Task Categories
-- [ ] Email Notifications
-- [ ] Team Collaboration
-- [ ] Calendar View
-
----
-
-# 👩‍💻 Author
-
-**Sneha Mishra**
-
-💼 Full Stack Developer | Go Backend Developer | AI Enthusiast
-
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourprofile
-
 ---
 
 <div align="center">
